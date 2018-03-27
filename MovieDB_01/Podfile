@@ -1,0 +1,9 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'MovieDB_01' do
+use_frameworks!
+
+pod 'SidebarOverlay', '~> 3.1'
+
+end

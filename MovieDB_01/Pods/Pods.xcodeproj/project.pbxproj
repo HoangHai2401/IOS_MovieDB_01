@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3873E5153C4C14E4180E1BDA10990FC5 /* Pods-MovieDB_01-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE5C3631B1301D004221A59349CDF20 /* Pods-MovieDB_01-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A332D39A0EF428082D471071CEECBC1 /* SOContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B8D5AE8BA2657B79F2ECA07000D5B /* SOContainerViewController.swift */; };
+		41D65308E2390D0C0FADE4DBB111C6BB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACBFB2C463D71F87EDACC58ED80875F /* UIViewController.swift */; };
+		63915D59A12A09D5D4FF89FA693772E8 /* SidebarOverlay-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C4967817160363381A41AB8F60655B4D /* SidebarOverlay-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73A9DEC5CB6FF77D789C0BDD31597E82 /* SidebarOverlay-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1396BD37993170F8C9B0D82A54FFC8 /* SidebarOverlay-dummy.m */; };
+		75213529421DD5F2CB47F4B879D07BEE /* Pods-MovieDB_01-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 263C64A609442B64382A1B5019D4D2DD /* Pods-MovieDB_01-dummy.m */; };
+		8B3229BBFE8C29FA7E94C7C636722CDD /* SOSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B0E6BB2161978D35B4A7ECB81D362 /* SOSide.swift */; };
+		9D845AFBB16A2110D14EC8A19538D525 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		AA47BE06B248F7EAA4E073C613F5D72C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		BE906704EAE391746A2FFD0285434C9E /* SidebarOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 94BA44B98850309FC90888020E808C19 /* SidebarOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		537B93F6E24F2BAD382D7E17D0357A2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F98DA59A26E364B921FAF43499231627;
+			remoteInfo = SidebarOverlay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07C0C6D86D81AD80E80A49C6466235D0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A232FCA2DB44C29010AB1738837E305 /* Pods-MovieDB_01-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MovieDB_01-resources.sh"; sourceTree = "<group>"; };
+		0F95A4788720B5FABC7F79D64083C9DD /* Pods-MovieDB_01-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MovieDB_01-acknowledgements.markdown"; sourceTree = "<group>"; };
+		153F6FFB02B1B97EBD615E4CF8C723EE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		263C64A609442B64382A1B5019D4D2DD /* Pods-MovieDB_01-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MovieDB_01-dummy.m"; sourceTree = "<group>"; };
+		271AC4C0BDBA2A6BFA975DDFA96DF93E /* SidebarOverlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SidebarOverlay.framework; path = SidebarOverlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ACBFB2C463D71F87EDACC58ED80875F /* UIViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = SidebarOverlay/SidebarOverlay/UIViewController.swift; sourceTree = "<group>"; };
+		2E7B8D5AE8BA2657B79F2ECA07000D5B /* SOContainerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SOContainerViewController.swift; path = SidebarOverlay/SidebarOverlay/SOContainerViewController.swift; sourceTree = "<group>"; };
+		3F665FB95D97BC57CEC67EDBFC1AFB37 /* Pods_MovieDB_01.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MovieDB_01.framework; path = "Pods-MovieDB_01.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40DD931437C367234259A9172B0CA373 /* SidebarOverlay.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SidebarOverlay.modulemap; sourceTree = "<group>"; };
+		451702E10DDAC41D8E0183AC82AEFD28 /* SidebarOverlay.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SidebarOverlay.xcconfig; sourceTree = "<group>"; };
+		4A5B0E6BB2161978D35B4A7ECB81D362 /* SOSide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SOSide.swift; path = SidebarOverlay/SidebarOverlay/SOSide.swift; sourceTree = "<group>"; };
+		56EC001108075E4902BB6AD78700EF2D /* Pods-MovieDB_01-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MovieDB_01-acknowledgements.plist"; sourceTree = "<group>"; };
+		5CB98C870EE47DB4323C2B7865C48B25 /* Pods-MovieDB_01-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MovieDB_01-frameworks.sh"; sourceTree = "<group>"; };
+		68F47C89281166090B6A032F25868041 /* Pods-MovieDB_01.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MovieDB_01.debug.xcconfig"; sourceTree = "<group>"; };
+		725F641960A9B5C4E9C9105A8586617B /* Pods-MovieDB_01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MovieDB_01.release.xcconfig"; sourceTree = "<group>"; };
+		831D10D9008346C88F9EA003310093D1 /* Pods-MovieDB_01.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-MovieDB_01.modulemap"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94BA44B98850309FC90888020E808C19 /* SidebarOverlay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SidebarOverlay.h; path = SidebarOverlay/SidebarOverlay/SidebarOverlay.h; sourceTree = "<group>"; };
+		C4967817160363381A41AB8F60655B4D /* SidebarOverlay-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SidebarOverlay-umbrella.h"; sourceTree = "<group>"; };
+		C9D3C7F096D69CD2D3444588137D985D /* SidebarOverlay-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SidebarOverlay-prefix.pch"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DB1396BD37993170F8C9B0D82A54FFC8 /* SidebarOverlay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SidebarOverlay-dummy.m"; sourceTree = "<group>"; };
+		EDE5C3631B1301D004221A59349CDF20 /* Pods-MovieDB_01-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MovieDB_01-umbrella.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7635A2F2F0A473F239F667215392D5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA47BE06B248F7EAA4E073C613F5D72C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5EBDE7E2EE541D44C7C3AD0002B2293 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D845AFBB16A2110D14EC8A19538D525 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15ACFA0ED13DABB01696C50179AB078D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A2E83BF2758775117F1DF33410F35EA3 /* Pods-MovieDB_01 */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		274B87EADF4F27A17C9C20970D46139A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F665FB95D97BC57CEC67EDBFC1AFB37 /* Pods_MovieDB_01.framework */,
+				271AC4C0BDBA2A6BFA975DDFA96DF93E /* SidebarOverlay.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A1A4179E6A4C517D44C9E59D8CD2E6B /* SidebarOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				94BA44B98850309FC90888020E808C19 /* SidebarOverlay.h */,
+				2E7B8D5AE8BA2657B79F2ECA07000D5B /* SOContainerViewController.swift */,
+				4A5B0E6BB2161978D35B4A7ECB81D362 /* SOSide.swift */,
+				2ACBFB2C463D71F87EDACC58ED80875F /* UIViewController.swift */,
+				73FCB118BC69A611C682ED23A6F40D47 /* Support Files */,
+			);
+			name = SidebarOverlay;
+			path = SidebarOverlay;
+			sourceTree = "<group>";
+		};
+		73FCB118BC69A611C682ED23A6F40D47 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				153F6FFB02B1B97EBD615E4CF8C723EE /* Info.plist */,
+				40DD931437C367234259A9172B0CA373 /* SidebarOverlay.modulemap */,
+				451702E10DDAC41D8E0183AC82AEFD28 /* SidebarOverlay.xcconfig */,
+				DB1396BD37993170F8C9B0D82A54FFC8 /* SidebarOverlay-dummy.m */,
+				C9D3C7F096D69CD2D3444588137D985D /* SidebarOverlay-prefix.pch */,
+				C4967817160363381A41AB8F60655B4D /* SidebarOverlay-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SidebarOverlay";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				8F3CA817EDB71CB30C3552140E5A774D /* Pods */,
+				274B87EADF4F27A17C9C20970D46139A /* Products */,
+				15ACFA0ED13DABB01696C50179AB078D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8F3CA817EDB71CB30C3552140E5A774D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A1A4179E6A4C517D44C9E59D8CD2E6B /* SidebarOverlay */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A2E83BF2758775117F1DF33410F35EA3 /* Pods-MovieDB_01 */ = {
+			isa = PBXGroup;
+			children = (
+				07C0C6D86D81AD80E80A49C6466235D0 /* Info.plist */,
+				831D10D9008346C88F9EA003310093D1 /* Pods-MovieDB_01.modulemap */,
+				0F95A4788720B5FABC7F79D64083C9DD /* Pods-MovieDB_01-acknowledgements.markdown */,
+				56EC001108075E4902BB6AD78700EF2D /* Pods-MovieDB_01-acknowledgements.plist */,
+				263C64A609442B64382A1B5019D4D2DD /* Pods-MovieDB_01-dummy.m */,
+				5CB98C870EE47DB4323C2B7865C48B25 /* Pods-MovieDB_01-frameworks.sh */,
+				0A232FCA2DB44C29010AB1738837E305 /* Pods-MovieDB_01-resources.sh */,
+				EDE5C3631B1301D004221A59349CDF20 /* Pods-MovieDB_01-umbrella.h */,
+				68F47C89281166090B6A032F25868041 /* Pods-MovieDB_01.debug.xcconfig */,
+				725F641960A9B5C4E9C9105A8586617B /* Pods-MovieDB_01.release.xcconfig */,
+			);
+			name = "Pods-MovieDB_01";
+			path = "Target Support Files/Pods-MovieDB_01";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7F7ECF23C8B7F8C57F2E506E8F07F628 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3873E5153C4C14E4180E1BDA10990FC5 /* Pods-MovieDB_01-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE996E44476FDBA8B2268EC0E6004E59 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63915D59A12A09D5D4FF89FA693772E8 /* SidebarOverlay-umbrella.h in Headers */,
+				BE906704EAE391746A2FFD0285434C9E /* SidebarOverlay.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		539DF8F95DBE6BFAFE005D4E4B168169 /* Pods-MovieDB_01 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC99C10FC4274CD9C20A607FBFB0C0D3 /* Build configuration list for PBXNativeTarget "Pods-MovieDB_01" */;
+			buildPhases = (
+				0B3C59ADE6728C2B88B9022264080489 /* Sources */,
+				D5EBDE7E2EE541D44C7C3AD0002B2293 /* Frameworks */,
+				7F7ECF23C8B7F8C57F2E506E8F07F628 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				064CD91DDDDBEFF66B7C5F4052465F48 /* PBXTargetDependency */,
+			);
+			name = "Pods-MovieDB_01";
+			productName = "Pods-MovieDB_01";
+			productReference = 3F665FB95D97BC57CEC67EDBFC1AFB37 /* Pods_MovieDB_01.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F98DA59A26E364B921FAF43499231627 /* SidebarOverlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71B474369D71F1ECA49014F60B2ABD87 /* Build configuration list for PBXNativeTarget "SidebarOverlay" */;
+			buildPhases = (
+				6757B24610C6D25456FB1FC0398D1513 /* Sources */,
+				A7635A2F2F0A473F239F667215392D5C /* Frameworks */,
+				FE996E44476FDBA8B2268EC0E6004E59 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SidebarOverlay;
+			productName = SidebarOverlay;
+			productReference = 271AC4C0BDBA2A6BFA975DDFA96DF93E /* SidebarOverlay.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 274B87EADF4F27A17C9C20970D46139A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				539DF8F95DBE6BFAFE005D4E4B168169 /* Pods-MovieDB_01 */,
+				F98DA59A26E364B921FAF43499231627 /* SidebarOverlay */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B3C59ADE6728C2B88B9022264080489 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75213529421DD5F2CB47F4B879D07BEE /* Pods-MovieDB_01-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6757B24610C6D25456FB1FC0398D1513 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73A9DEC5CB6FF77D789C0BDD31597E82 /* SidebarOverlay-dummy.m in Sources */,
+				3A332D39A0EF428082D471071CEECBC1 /* SOContainerViewController.swift in Sources */,
+				8B3229BBFE8C29FA7E94C7C636722CDD /* SOSide.swift in Sources */,
+				41D65308E2390D0C0FADE4DBB111C6BB /* UIViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		064CD91DDDDBEFF66B7C5F4052465F48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SidebarOverlay;
+			target = F98DA59A26E364B921FAF43499231627 /* SidebarOverlay */;
+			targetProxy = 537B93F6E24F2BAD382D7E17D0357A2B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		62C1950DE603D7729B59412E8289F238 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 451702E10DDAC41D8E0183AC82AEFD28 /* SidebarOverlay.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SidebarOverlay/SidebarOverlay-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SidebarOverlay/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SidebarOverlay/SidebarOverlay.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SidebarOverlay;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A18F77A40277DDF6680CF73BD333E4C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 451702E10DDAC41D8E0183AC82AEFD28 /* SidebarOverlay.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SidebarOverlay/SidebarOverlay-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SidebarOverlay/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SidebarOverlay/SidebarOverlay.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SidebarOverlay;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A7BCAFFA87C8C8C09316E6048D2A163D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 725F641960A9B5C4E9C9105A8586617B /* Pods-MovieDB_01.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-MovieDB_01/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MovieDB_01/Pods-MovieDB_01.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_MovieDB_01;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B7324857C38B065FEB1EEE3105C2367A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F53CD3E4F054C04802EBF7A3734C14DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68F47C89281166090B6A032F25868041 /* Pods-MovieDB_01.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-MovieDB_01/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MovieDB_01/Pods-MovieDB_01.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_MovieDB_01;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */,
+				B7324857C38B065FEB1EEE3105C2367A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71B474369D71F1ECA49014F60B2ABD87 /* Build configuration list for PBXNativeTarget "SidebarOverlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A18F77A40277DDF6680CF73BD333E4C1 /* Debug */,
+				62C1950DE603D7729B59412E8289F238 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC99C10FC4274CD9C20A607FBFB0C0D3 /* Build configuration list for PBXNativeTarget "Pods-MovieDB_01" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F53CD3E4F054C04802EBF7A3734C14DF /* Debug */,
+				A7BCAFFA87C8C8C09316E6048D2A163D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

@@ -9,9 +9,9 @@
 import Foundation
 
 
-class Genres{
-    var id: Int
-    var name: String
+struct Genres{
+    var id: Int?
+    var name: String?
     
     init(id: Int, name: String) {
         self.id = id
