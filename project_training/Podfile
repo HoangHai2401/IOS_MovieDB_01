@@ -1,0 +1,11 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target ‘project_training’ do
+use_frameworks!
+
+pod 'SidebarOverlay', '~> 3.1'
+pod 'SwiftyJSON'
+pod 'Alamofire', '~> 4.2'
+
+end
