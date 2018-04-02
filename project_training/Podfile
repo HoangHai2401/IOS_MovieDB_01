@@ -7,5 +7,6 @@ use_frameworks!
 pod 'SidebarOverlay', '~> 3.1'
 pod 'SwiftyJSON'
 pod 'Alamofire', '~> 4.2'
+pod 'SwiftLint'
 
 end
