@@ -10,6 +10,15 @@
 		2953188A2071EBF3009178FA /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318892071EBF3009178FA /* ApiService.swift */; };
 		2953188D2071EC48009178FA /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953188C2071EC48009178FA /* Urls.swift */; };
 		295318922071FF11009178FA /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318912071FF11009178FA /* Common.swift */; };
+		295318952072286A009178FA /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318942072286A009178FA /* Genres.swift */; };
+		2953189720722889009178FA /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953189620722889009178FA /* Movie.swift */; };
+		2953189920722895009178FA /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953189820722895009178FA /* Person.swift */; };
+		2953189C20722C7E009178FA /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953189B20722C7E009178FA /* UIColorExtension.swift */; };
+		2953189E20722DE1009178FA /* UISegmentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953189D20722DE1009178FA /* UISegmentExtension.swift */; };
+		295318A020722F3C009178FA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953189F20722F3C009178FA /* UIImageExtension.swift */; };
+		295318A220722F7C009178FA /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318A120722F7C009178FA /* UIImageViewExtension.swift */; };
+		295318A6207233F7009178FA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318A5207233F7009178FA /* BaseViewController.swift */; };
+		295318A8207234F1009178FA /* BaseHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318A7207234F1009178FA /* BaseHomeViewController.swift */; };
 		29AB270C2071358F0070016B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB270B2071358F0070016B /* AppDelegate.swift */; };
 		29AB270E2071358F0070016B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB270D2071358F0070016B /* ViewController.swift */; };
 		29AB27112071358F0070016B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AB270F2071358F0070016B /* Main.storyboard */; };
@@ -22,9 +31,18 @@
 		295318892071EBF3009178FA /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		2953188C2071EC48009178FA /* Urls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		295318912071FF11009178FA /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		295318942072286A009178FA /* Genres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		2953189620722889009178FA /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		2953189820722895009178FA /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		2953189B20722C7E009178FA /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		2953189D20722DE1009178FA /* UISegmentExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISegmentExtension.swift; sourceTree = "<group>"; };
+		2953189F20722F3C009178FA /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		295318A120722F7C009178FA /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		295318A5207233F7009178FA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		295318A7207234F1009178FA /* BaseHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseHomeViewController.swift; sourceTree = "<group>"; };
 		29AB27082071358F0070016B /* project_training.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project_training.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		29AB270B2071358F0070016B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29AB270D2071358F0070016B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		29AB270B2071358F0070016B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = project_training/AppDelegate.swift; sourceTree = "<group>"; };
+		29AB270D2071358F0070016B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = project_training/ViewController.swift; sourceTree = "<group>"; };
 		29AB27102071358F0070016B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		29AB27122071358F0070016B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29AB27152071358F0070016B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,9 +81,52 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		2953189320722854009178FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				295318942072286A009178FA /* Genres.swift */,
+				2953189620722889009178FA /* Movie.swift */,
+				2953189820722895009178FA /* Person.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2953189A20722C56009178FA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2953189B20722C7E009178FA /* UIColorExtension.swift */,
+				2953189D20722DE1009178FA /* UISegmentExtension.swift */,
+				2953189F20722F3C009178FA /* UIImageExtension.swift */,
+				295318A120722F7C009178FA /* UIImageViewExtension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		295318A32072336B009178FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29AB270D2071358F0070016B /* ViewController.swift */,
+				295318A5207233F7009178FA /* BaseViewController.swift */,
+				295318A7207234F1009178FA /* BaseHomeViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		295318A420723388009178FA /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				29AB270B2071358F0070016B /* AppDelegate.swift */,
+			);
+			name = Delegate;
+			sourceTree = "<group>";
+		};
 		29AB26FF2071358F0070016B = {
 			isa = PBXGroup;
 			children = (
+				295318A420723388009178FA /* Delegate */,
+				295318A32072336B009178FA /* View */,
+				2953189A20722C56009178FA /* Extension */,
+				2953189320722854009178FA /* Model */,
 				2953188B2071EC37009178FA /* Common */,
 				295318882071EBDF009178FA /* ApiService */,
 				29AB270A2071358F0070016B /* project_training */,
@@ -86,8 +147,6 @@
 		29AB270A2071358F0070016B /* project_training */ = {
 			isa = PBXGroup;
 			children = (
-				29AB270B2071358F0070016B /* AppDelegate.swift */,
-				29AB270D2071358F0070016B /* ViewController.swift */,
 				29AB270F2071358F0070016B /* Main.storyboard */,
 				29AB27122071358F0070016B /* Assets.xcassets */,
 				29AB27142071358F0070016B /* LaunchScreen.storyboard */,
@@ -260,10 +319,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295318A6207233F7009178FA /* BaseViewController.swift in Sources */,
+				2953189720722889009178FA /* Movie.swift in Sources */,
 				2953188D2071EC48009178FA /* Urls.swift in Sources */,
 				29AB270E2071358F0070016B /* ViewController.swift in Sources */,
 				29AB270C2071358F0070016B /* AppDelegate.swift in Sources */,
+				295318952072286A009178FA /* Genres.swift in Sources */,
+				2953189E20722DE1009178FA /* UISegmentExtension.swift in Sources */,
+				295318A220722F7C009178FA /* UIImageViewExtension.swift in Sources */,
+				2953189C20722C7E009178FA /* UIColorExtension.swift in Sources */,
 				295318922071FF11009178FA /* Common.swift in Sources */,
+				295318A8207234F1009178FA /* BaseHomeViewController.swift in Sources */,
+				2953189920722895009178FA /* Person.swift in Sources */,
+				295318A020722F3C009178FA /* UIImageExtension.swift in Sources */,
 				2953188A2071EBF3009178FA /* ApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
