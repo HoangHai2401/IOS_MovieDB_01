@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.4.0)
   - SidebarOverlay (3.1.0)
-  - SwiftLint (0.24.0)
+  - SwiftLint (0.17.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -13,9 +13,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   SidebarOverlay: 04eee5de00d4c71a4381f937d9bdf7b3c9d7d1e7
-  SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
+  SwiftLint: 9fb1dd71d5952d130f8c2fb60ae2e1475cf5d575
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: 75ad6be395681e48e309c3905d5b7c7f5d0f8be7
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.1.1

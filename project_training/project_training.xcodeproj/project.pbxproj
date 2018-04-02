@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2953188A2071EBF3009178FA /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318892071EBF3009178FA /* ApiService.swift */; };
+		2953188D2071EC48009178FA /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2953188C2071EC48009178FA /* Urls.swift */; };
+		295318922071FF11009178FA /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295318912071FF11009178FA /* Common.swift */; };
 		29AB270C2071358F0070016B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB270B2071358F0070016B /* AppDelegate.swift */; };
 		29AB270E2071358F0070016B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AB270D2071358F0070016B /* ViewController.swift */; };
 		29AB27112071358F0070016B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AB270F2071358F0070016B /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		295318892071EBF3009178FA /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		2953188C2071EC48009178FA /* Urls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		295318912071FF11009178FA /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		29AB27082071358F0070016B /* project_training.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project_training.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29AB270B2071358F0070016B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29AB270D2071358F0070016B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,9 +46,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		295318882071EBDF009178FA /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				2953188C2071EC48009178FA /* Urls.swift */,
+				295318892071EBF3009178FA /* ApiService.swift */,
+			);
+			name = ApiService;
+			sourceTree = "<group>";
+		};
+		2953188B2071EC37009178FA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				295318912071FF11009178FA /* Common.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		29AB26FF2071358F0070016B = {
 			isa = PBXGroup;
 			children = (
+				2953188B2071EC37009178FA /* Common */,
+				295318882071EBDF009178FA /* ApiService */,
 				29AB270A2071358F0070016B /* project_training */,
 				29AB27092071358F0070016B /* Products */,
 				7E79CC9C85B15F024DE0AAC3 /* Pods */,
@@ -95,6 +120,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29AB271A2071358F0070016B /* Build configuration list for PBXNativeTarget "project_training" */;
 			buildPhases = (
+				2953188E2071F444009178FA /* ShellScript */,
 				493024E2BD0121DC79EB9AB9 /* [CP] Check Pods Manifest.lock */,
 				29AB27042071358F0070016B /* Sources */,
 				29AB27052071358F0070016B /* Frameworks */,
@@ -159,6 +185,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2953188E2071F444009178FA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
 		493024E2BD0121DC79EB9AB9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -174,7 +213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B132660CF87F9A5AF571E0F1 /* [CP] Embed Pods Frameworks */ = {
@@ -221,8 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2953188D2071EC48009178FA /* Urls.swift in Sources */,
 				29AB270E2071358F0070016B /* ViewController.swift in Sources */,
 				29AB270C2071358F0070016B /* AppDelegate.swift in Sources */,
+				295318922071FF11009178FA /* Common.swift in Sources */,
+				2953188A2071EBF3009178FA /* ApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +428,7 @@
 				29AB271C2071358F0070016B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
