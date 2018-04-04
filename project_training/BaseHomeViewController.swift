@@ -9,7 +9,6 @@
 import UIKit
 
 class BaseHomeViewController: UIViewController {
-
     private lazy var sideBarButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: "btn_left")?.withRenderingMode(.alwaysOriginal),
                                style: .plain, target: self, action: #selector(onSidebarButtonClicked(sender:)))
@@ -29,6 +28,9 @@ class BaseHomeViewController: UIViewController {
     }
 
     func onSidebarButtonClicked(sender: AnyObject) {
+        if let container = self.so_containerViewController {
+            container.isSideViewControllerPresented = true
+        }
     }
 
     func addOptionsMenu(sender: AnyObject) {

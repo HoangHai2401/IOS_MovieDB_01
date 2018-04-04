@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
-class Person {
+class Person: BaseModel {
     var birthday: String?
     var deathday: String?
     var personId: Int?
@@ -24,19 +24,23 @@ class Person {
     var imdbId: String?
     var homepage: String?
 
-    init(json: JSON) {
-        self.birthday = json["birthday"].stringValue
-        self.deathday = json["deathday"].stringValue
-        self.personId = json["id"].intValue
-        self.name = json["name"].stringValue
-        self.alsoKnownAs = json["also_known_as"].arrayValue
-        self.gender = json["gender"].intValue
-        self.biography = json["biography"].stringValue
-        self.popularity = json["popularity"].stringValue
-        self.placeOfBirth = json["place_of_birth"].stringValue
-        self.profilePath = json["profile_path"].stringValue
-        self.adult = json["adult"].boolValue
-        self.imdbId = json["imdb_id"].stringValue
-        self.homepage = json["homepage"].stringValue
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+
+    func mapping(map: Map) {
+        birthday <- map["birthday"]
+        deathday <- map["deathday"]
+        personId <- map["id"]
+        name <- map["name"]
+        alsoKnownAs <- map["also_known_as"]
+        gender <- map["gender"]
+        biography <- map["biography"]
+        popularity <- map["popularity"]
+        placeOfBirth <- map["place_of_birth"]
+        profilePath <- map["profile_path"]
+        adult <- map["adult"]
+        imdbId <- map["imdb_id"]
+        homepage <- map["homepage"]
     }
 }

@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
-class Movie {
+class Movie: BaseModel {
     var adult: Bool?
     var backdropPath: String?
     var genreIds: [Any]?
@@ -24,19 +24,28 @@ class Movie {
     var voteAverage: Double?
     var voteCount: Int?
 
-    init(json: JSON) {
-        self.title = json["title"].stringValue
-        self.originalTitle = json["original_title"].stringValue
-        self.overview = json["overview"].stringValue
-        self.movieId = json["id"].intValue
-        self.posterPath = json["poster_path"].stringValue
-        self.voteAverage = json["vote_average"].doubleValue
-        self.genreIds = json["genre_ids"].arrayValue
-        self.releaseDate = json["release_date"].stringValue
-        self.backdropPath = json["backdrop_path"].stringValue
-        self.voteCount = json["vote_count"].intValue
-        self.adult = json["adult"].boolValue
-        self.video = json["video"].boolValue
-        self.popularity = json["popularity"].doubleValue
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+
+    func mapping(map: Map) {
+        title <- map["title"]
+        originalTitle <- map["original_title"]
+        overview <- map["overview"]
+        movieId <- map["id"]
+        posterPath <- map["poster_path"]
+        voteAverage <- map["vote_average"]
+        genreIds <- map["genre_ids"]
+        releaseDate <- map["release_date"]
+        backdropPath <- map["backdrop_path"]
+        voteCount <- map["vote_count"]
+        adult <- map["adult"]
+        video <- map["video"]
+        popularity <- map["popularity"]
+    }
+
+    func getFullLink() -> String? {
+        guard let path = posterPath else { return nil }
+        return Urls.imageUrl+"\(path)"
     }
 }
