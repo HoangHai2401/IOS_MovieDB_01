@@ -15,4 +15,5 @@ public struct Urls {
     static let nowPlayingUrl = "movie/now_playing"
     static let topRatedUrl = "movie/top_rated"
     static let upcomingUrl = "movie/upcoming"
+    static let imageUrl = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"
 }

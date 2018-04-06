@@ -7,22 +7,33 @@
 //
 
 import UIKit
+import SidebarOverlay
 
-class ViewController: UIViewController {
+class ViewController: SOContainerViewController {
+    override var isSideViewControllerPresented: Bool {
+        didSet {
+            if isSideViewControllerPresented == true {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                to: nil, from: nil, for: nil)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        getData()
+        self.setupSidebar()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    func getData() {
-        ApiService.apiService.apiRequest(api: Urls.nowPlayingUrl, page: 1) { (json) in
-            print(json)
-        }
+    private func setupSidebar() {
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        self.menuSide = .left
+        self.menuWidth = 0.7 * width
+        self.topViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController")
+        self.sideViewController = self.storyboard?.instantiateViewController(withIdentifier: "CustomSideViewController")
     }
 }

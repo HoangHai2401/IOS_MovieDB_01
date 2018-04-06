@@ -9,54 +9,46 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import ObjectMapper
 
 class ApiService {
-    class var apiService: ApiService {
-        struct Static {
-            static let instance = ApiService()
-        }
-        return Static.instance
+    static let share = ApiService()
+
+    private var alamofireManager = Alamofire.SessionManager.default
+
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 30
+        configuration.timeoutIntervalForResource = 30
+        alamofireManager = Alamofire.SessionManager(configuration: configuration)
+        alamofireManager.adapter = CustomRequestAdapter()
     }
 
-    func apiRequest(api: String, page: Int, completionHandler: @escaping (_ object: JSON) -> Void) {
-        let pathAPI = Urls.baseApi + "\(api)" + Urls.apiKey + "\(page)"
-        Alamofire.request(pathAPI, method: .get, encoding: JSONEncoding.default).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                if let status = response.response?.statusCode {
-                    switch status {
-                    case 200:
-                        print("success")
-                        let json = JSON(value)
-                        completionHandler(json)
-                    default:
-                        print("error with response status: \(status)")
+    func request<T: Mappable>(input: BaseRequest, completion: @escaping (_ value: T?, _ error: BaseError?) -> Void) {
+        alamofireManager.request(input.url, method: input.requestType, parameters: input.body, encoding: input.encoding)
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                print(response.request?.url ?? "Error")
+                print(response)
+                switch response.result {
+                case .success(let value):
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode == 200 {
+                            let object = Mapper<T>().map(JSONObject: value)
+                            completion(object, nil)
+                        } else {
+                            if let error = Mapper<ErrorResponse>().map(JSONObject: value) {
+                                completion(nil, BaseError.apiFailure(error: error))
+                            } else {
+                                completion(nil, BaseError.httpError(httpCode: statusCode))
+                            }
+                        }
+                    } else {
+                        completion(nil, BaseError.unexpectedError)
                     }
+                case .failure(let error):
+                    completion(nil, error as? BaseError)
                 }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    func genresApiRequest(genresId: Int, page: Int, completionHandler: @escaping (_ object: JSON) -> Void) {
-        let pathAPI = Urls.baseApi + "genre/\(genresId)/movies" + Urls.apiKey + "\(page)"
-        Alamofire.request(pathAPI, method: .get, encoding: JSONEncoding.default).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                if let status = response.response?.statusCode {
-                    switch status {
-                    case 200:
-                        print("success")
-                        let json = JSON(value)
-                        completionHandler(json)
-                    default:
-                        print("error with response status: \(status)")
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
         }
     }
 }
