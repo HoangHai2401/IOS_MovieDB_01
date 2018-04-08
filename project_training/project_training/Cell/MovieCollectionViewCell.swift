@@ -24,8 +24,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
 
     public func setContentForCell(movie: Movie) {
-        let url = movie.getFullLink()
-        itemImageView.downloadedFrom(link: url!)
-        itemLabel.text = movie.title
+        if let url = movie.getFullLink() {
+            itemImageView.downloadedFrom(link: url)
+            itemLabel.text = movie.title
+        }
     }
 }
