@@ -15,6 +15,9 @@ protocol MovieRepository {
 
     func getMovieByGenres(genresId: Int, page: Int,
                           completion: @escaping (BaseResult<MovieListByGenresResponse>) -> Void)
+
+    func searchMovieByQuery(query: String, page: Int,
+                            completion: @escaping (BaseResult<MovieListByQueryResponse>) -> Void)
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -43,6 +46,20 @@ class MovieRepositoryImpl: MovieRepository {
                           completion: @escaping (BaseResult<MovieListByGenresResponse>) -> Void) {
         let input = MovieListByGenresRequest(genresId: genresId, page: page)
         api?.request(input: input) { (object: MovieListByGenresResponse?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+
+    func searchMovieByQuery(query: String, page: Int,
+                            completion: @escaping (BaseResult<MovieListByQueryResponse>) -> Void) {
+        let input = MovieListByQueryRequest(query: query, page: page)
+        api?.request(input: input) { (object: MovieListByQueryResponse?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {

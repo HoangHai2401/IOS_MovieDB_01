@@ -9,14 +9,13 @@
 import UIKit
 import SwiftyJSON
 
-class MainViewController: BaseHomeViewController, AlertViewControllerExtension {
+class MainViewController: BaseHomeViewController {
     let heightForLabelCell = 50
     let cellsPerRow = 3
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
     var movieList = [Movie]()
     var listMovieOfGenres = [(String, [Movie])]()
-    var defaultPage = 1
     fileprivate var activityIndicator: LoadMoreActivityIndicator!
 
     @IBOutlet weak var categorySegment: UISegmentedControl!
@@ -48,12 +47,12 @@ class MainViewController: BaseHomeViewController, AlertViewControllerExtension {
 
     func getdata(url: String) {
         movieRepository.getMovieByCategory(categoryUrl: url, page: defaultPage) { result in
-                switch result {
-                case .success(let MovieListByCategoryResponse):
-                    self.movieList = (MovieListByCategoryResponse?.movieList)!
-                case .failure(let error):
-                    self.showErrorAlert(message: error?.errorMessage)
-                }
+            switch result {
+            case .success(let MovieListByCategoryResponse):
+                self.movieList += (MovieListByCategoryResponse?.movieList)!
+            case .failure(let error):
+                self.showErrorAlert(message: error?.errorMessage)
+            }
             DispatchQueue.main.async {
                 self.movieCollectionView.reloadData()
             }
@@ -65,6 +64,9 @@ class MainViewController: BaseHomeViewController, AlertViewControllerExtension {
         movieCollectionView.dataSource = self
         genresTableView.delegate = self
         genresTableView.dataSource = self
+        super.autocompleteTableView.delegate = self
+        super.autocompleteTableView.dataSource = self
+        super.autocompleteTableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchcell")
         categorySegment.apportionsSegmentWidthsByContent = true
         categorySegment.addUnderlineForSelectedSegment()
         for item in 0...4 {
@@ -135,6 +137,19 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "detail", sender: nil)
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.movieCollectionView {
+            activityIndicator.scrollViewDidScroll(scrollView: scrollView) {
+                DispatchQueue.global(qos: .utility).async {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.loadmore()
+                        self?.activityIndicator.loadMoreActionFinshed(scrollView: scrollView)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: extension UICollectionViewDataSource for movieCollectionView in MainViewController
@@ -174,38 +189,58 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: extension UITableViewDelegate for genresTableview in MainViewController
+// MARK: extension UITableViewDelegate for genresTableview and autocompleteTableView in MainViewController
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = CGFloat(tableView.bounds.width * 1.5) / CGFloat(cellsPerRow) + CGFloat(heightForLabelCell)
-        return height
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        activityIndicator.scrollViewDidScroll(scrollView: scrollView) {
-            DispatchQueue.global(qos: .utility).async {
-                DispatchQueue.main.async { [weak self] in
-                    self?.loadmore()
-                    self?.activityIndicator.loadMoreActionFinshed(scrollView: scrollView)
-                }
-            }
+        var heightCell: CGFloat?
+        if tableView == self.genresTableView {
+            let height = CGFloat(tableView.bounds.width * 1.5) / CGFloat(cellsPerRow) + CGFloat(heightForLabelCell)
+            heightCell = height
         }
+        if tableView == super.autocompleteTableView {
+            let height = CGFloat(heightForLabelCell)
+            heightCell = height
+        }
+        return heightCell!
     }
 }
 
-// MARK: extension UITableViewDataSource for genresTableview in MainViewController
+// MARK: extension UITableViewDataSource for genresTableview and autocompleteTableView in MainViewController
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Common.listGenres.count
+        var count: Int?
+        if tableView == self.genresTableView {
+            count = Common.listGenres.count
+        }
+        if tableView == super.autocompleteTableView {
+            count =  super.searchList.count
+        }
+        return count!
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "genrescell") as? GenresTableViewCell else {
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "genrescell", for: indexPath)
+        var cellToReturn = UITableViewCell()
+        if tableView == self.genresTableView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "genrescell") as? GenresTableViewCell else {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "genrescell", for: indexPath)
+                cellToReturn = cell
+                return cell
+            }
+            cell.setContentForCell(genresId: Common.listGenres[indexPath.row].0)
+            cell.sectionLabel.text = Common.listGenres[indexPath.row].1
             return cell
         }
-        cell.setContentForCell(genresId: Common.listGenres[indexPath.row].0)
-        cell.sectionLabel.text = Common.listGenres[indexPath.row].1
-        return cell
+        if tableView == super.autocompleteTableView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchcell") else {
+                return UITableViewCell()
+            }
+            if searchList.count > indexPath.row {
+                cell.textLabel?.text = super.searchList[indexPath.row]
+                cellToReturn = cell
+            }
+            return cell
+        }
+        return cellToReturn
     }
 }

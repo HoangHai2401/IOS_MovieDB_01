@@ -29,7 +29,6 @@ class ApiService {
             .validate(statusCode: 200..<500)
             .responseJSON { response in
                 print(response.request?.url ?? "Error")
-                print(response)
                 switch response.result {
                 case .success(let value):
                     if let statusCode = response.response?.statusCode {
