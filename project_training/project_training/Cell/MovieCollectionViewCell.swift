@@ -18,7 +18,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
 
     public func setElementForCell() {
-        itemImageView.contentMode = .scaleAspectFill
+        itemImageView.contentMode = .scaleToFill
         itemLabel.textAlignment = .center
         itemLabel.backgroundColor = UIColor(white: 1, alpha: 0.7)
     }

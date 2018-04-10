@@ -23,6 +23,12 @@ class Person: BaseModel {
     var adult: Bool?
     var imdbId: String?
     var homepage: String?
+    var castId: String?
+    var character: String?
+    var creditId: String?
+    var order: Int?
+    var department: String?
+    var personJob: String?
 
     required init?(map: Map) {
         mapping(map: map)
@@ -42,5 +48,16 @@ class Person: BaseModel {
         adult <- map["adult"]
         imdbId <- map["imdb_id"]
         homepage <- map["homepage"]
+        castId <- map["cast_id"]
+        character <- map["character"]
+        creditId <- map["credit_id"]
+        order <- map["order"]
+        department <- map["department"]
+        personJob <- map["job"]
+    }
+
+    func getFullLink() -> String? {
+        guard let path = profilePath else { return nil }
+        return Urls.imageUrl + "\(path)"
     }
 }
