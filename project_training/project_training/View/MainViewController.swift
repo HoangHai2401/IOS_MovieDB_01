@@ -126,6 +126,17 @@ class MainViewController: BaseHomeViewController {
         defaultPage += 1
         getdata(url: Common.listCategory[category].1)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail",
+            let navViewController = segue.destination as? UINavigationController,
+            let destination = navViewController.viewControllers.first as? DetailMovieViewController,
+            let indexPaths = self.movieCollectionView.indexPathsForSelectedItems {
+            let indexPath = indexPaths[0] as NSIndexPath
+            let movie = self.movieList[indexPath.row]
+            destination.movieData = movie
+        }
+    }
 }
 
 // MARK: extension UICollectionViewDelegate for movieCollectionView in MainViewController
@@ -202,6 +213,14 @@ extension MainViewController: UITableViewDelegate {
             heightCell = height
         }
         return heightCell!
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.genresTableView {
+        }
+        if tableView == super.autocompleteTableView {
+        }
+
     }
 }
 

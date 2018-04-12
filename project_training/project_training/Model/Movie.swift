@@ -12,7 +12,8 @@ import ObjectMapper
 class Movie: BaseModel {
     var adult: Bool?
     var backdropPath: String?
-    var genreIds: [Any]?
+    var genres = [Genres]()
+    var genreIds = [Int]()
     var movieId: Int?
     var originalTitle: String?
     var overview: String?
@@ -23,6 +24,8 @@ class Movie: BaseModel {
     var title: String?
     var voteAverage: Double?
     var voteCount: Int?
+    var originalLanguage: String?
+    var runTime: Int?
 
     required init?(map: Map) {
         mapping(map: map)
@@ -36,16 +39,19 @@ class Movie: BaseModel {
         posterPath <- map["poster_path"]
         voteAverage <- map["vote_average"]
         genreIds <- map["genre_ids"]
+        genres <- map["genres"]
         releaseDate <- map["release_date"]
         backdropPath <- map["backdrop_path"]
         voteCount <- map["vote_count"]
         adult <- map["adult"]
         video <- map["video"]
         popularity <- map["popularity"]
+        originalLanguage <- map["original_language"]
+        runTime <- map["runtime"]
     }
 
     func getFullLink() -> String? {
         guard let path = posterPath else { return nil }
-        return Urls.imageUrl+"\(path)"
+        return Urls.imageUrl + "\(path)"
     }
 }

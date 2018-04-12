@@ -11,7 +11,12 @@ import UIKit
 class BaseViewController: UIViewController {
     private lazy var backBarButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: "back_toolbar")?.withRenderingMode(.alwaysOriginal),
-                               style: .plain, target: self, action: #selector(onSidebarButtonClicked(sender:)))
+                               style: .plain, target: self, action: #selector(backButtonClicked(sender:)))
+    }()
+
+    private lazy var favoriteBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: "favorite")?.withRenderingMode(.alwaysOriginal),
+                               style: .plain, target: self, action: #selector(favoriteButtonClicked(sender:)))
     }()
 
     override func viewDidLoad() {
@@ -19,9 +24,13 @@ class BaseViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.backBarButton
+        self.navigationItem.rightBarButtonItem = self.favoriteBarButton
     }
 
-    func onSidebarButtonClicked(sender: AnyObject) {
+    func backButtonClicked(sender: AnyObject) {
         self.dismiss(animated: false, completion: nil)
+    }
+
+    func favoriteButtonClicked(sender: AnyObject) {
     }
 }

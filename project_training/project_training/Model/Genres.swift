@@ -7,13 +7,18 @@
 //
 
 import Foundation
+import ObjectMapper
 
-struct Genres {
-    var genresId: Int
-    var name: String
+class Genres: BaseModel {
+    var genresId: Int?
+    var name: String?
 
-    init(genresId: Int, name: String) {
-        self.genresId = genresId
-        self.name = name
+    required init?(map: Map) {
+        mapping(map: map)
+    }
+
+    func mapping(map: Map) {
+        genresId <- map["id"]
+        name <- map["name"]
     }
 }
