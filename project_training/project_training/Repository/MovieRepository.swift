@@ -18,6 +18,12 @@ protocol MovieRepository {
 
     func searchMovieByQuery(query: String, page: Int,
                             completion: @escaping (BaseResult<MovieListByQueryResponse>) -> Void)
+
+    func getMovieByPerson(personId: Int, page: Int,
+                          completion: @escaping (BaseResult<MovieListByPersonResponse>) -> Void)
+
+    func getMovieDetail(movieId: Int, page: Int,
+                        completion: @escaping (BaseResult<Movie>) -> Void)
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -25,6 +31,21 @@ class MovieRepositoryImpl: MovieRepository {
 
     required init(api: ApiService) {
         self.api = api
+    }
+
+    func getMovieDetail(movieId: Int, page: Int,
+                        completion: @escaping (BaseResult<Movie>) -> Void) {
+        let input = MovieDetailRequest(movieId: movieId, page: page)
+
+        api?.request(input: input) { (object: Movie?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
     }
 
     func getMovieByCategory(categoryUrl: String, page: Int,
@@ -46,6 +67,20 @@ class MovieRepositoryImpl: MovieRepository {
                           completion: @escaping (BaseResult<MovieListByGenresResponse>) -> Void) {
         let input = MovieListByGenresRequest(genresId: genresId, page: page)
         api?.request(input: input) { (object: MovieListByGenresResponse?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+
+    func getMovieByPerson(personId: Int, page: Int,
+                          completion: @escaping (BaseResult<MovieListByPersonResponse>) -> Void) {
+        let input = MovieListByPersonRequest(personId: personId, page: page)
+        api?.request(input: input) { (object: MovieListByPersonResponse?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {

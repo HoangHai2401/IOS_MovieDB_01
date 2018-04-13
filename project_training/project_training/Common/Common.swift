@@ -19,4 +19,20 @@ public struct Common {
                              (10770, "TV Movie"), (878, "Science Fiction"), (53, "Thriller"), (10752, "War"),
                              (37, "Western")]
     static let appName = "MovieDB_01"
+    static let defaultResult = "No result"
+    static let numberCellInRow = 5
+
+    static func getGender(gender: Int) -> String {
+        var genderString = ""
+
+        switch gender {
+        case 1:
+            genderString = "female"
+        case 2:
+            genderString = "male"
+        default:
+            genderString = "no info"
+        }
+        return genderString
+    }
 }

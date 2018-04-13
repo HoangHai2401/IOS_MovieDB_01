@@ -11,9 +11,10 @@ import UIKit
 class BaseHomeViewController: UIViewController, AlertViewControllerExtension {
     var searchList = [String]()
     var defaultPage = 1
+    var searchMovieList = [Movie]()
+
     let autocompleteTableView = UITableView()
     let nameNavigationLabel = UILabel()
-
     let searchBar = CustomTextField()
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
@@ -64,13 +65,16 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension {
         movieRepository.searchMovieByQuery(query: query, page: defaultPage) { result in
             switch result {
             case .success(let MovieListByQueryResponse):
+                self.searchMovieList = (MovieListByQueryResponse?.movieList)!
                 for item in (MovieListByQueryResponse?.movieList)! {
                     self.searchList.append(item.title!)
                 }
+                let height = self.autocompleteTableView.contentSize.height > self.view.frame.height ?
+                    self.view.frame.height / 3 : self.autocompleteTableView.contentSize.height
                 self.autocompleteTableView.frame = CGRect(x: self.autocompleteTableView.frame.origin.x,
-                                                          y: self.autocompleteTableView.frame.origin.y,
+                                                          y: self.autocompleteTableView.frame.origin.y + 5,
                                                           width: self.autocompleteTableView.frame.size.width,
-                                                          height: self.autocompleteTableView.contentSize.height)
+                                                          height: height)
                 DispatchQueue.main.async {
                     self.autocompleteTableView.reloadData()
                 }
