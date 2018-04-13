@@ -14,7 +14,7 @@ class Person: BaseModel {
     var deathday: String?
     var personId: Int?
     var name: String?
-    var alsoKnownAs: [Any]?
+    var alsoKnownAs: [String]?
     var gender: Int?
     var biography: String?
     var popularity: String?

@@ -54,4 +54,9 @@ class Movie: BaseModel {
         guard let path = posterPath else { return nil }
         return Urls.imageUrl + "\(path)"
     }
+
+    func getFullLinkBackDropPath() -> String? {
+        guard let path = backdropPath else { return nil }
+        return Urls.imageUrl + "\(path)"
+    }
 }

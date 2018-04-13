@@ -28,7 +28,9 @@ class BaseViewController: UIViewController {
     }
 
     func backButtonClicked(sender: AnyObject) {
-        self.dismiss(animated: false, completion: nil)
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 
     func favoriteButtonClicked(sender: AnyObject) {
