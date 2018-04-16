@@ -126,17 +126,6 @@ class MainViewController: BaseHomeViewController {
         defaultPage += 1
         getdata(url: Common.listCategory[category].1)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detail",
-            let navViewController = segue.destination as? UINavigationController,
-            let destination = navViewController.viewControllers.first as? DetailMovieViewController,
-            let indexPaths = self.movieCollectionView.indexPathsForSelectedItems {
-            let indexPath = indexPaths[0] as NSIndexPath
-            let movie = self.movieList[indexPath.row]
-            destination.movieData = movie
-        }
-    }
 }
 
 // MARK: extension UICollectionViewDelegate for movieCollectionView in MainViewController
@@ -146,7 +135,11 @@ extension MainViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "detail", sender: nil)
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(
+            withIdentifier: "detailViewController") as? DetailMovieViewController
+        viewController?.movieData = self.movieList[indexPath.row]
+        self.navigationController?.pushViewController(viewController!, animated: true)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -219,8 +212,15 @@ extension MainViewController: UITableViewDelegate {
         if tableView == self.genresTableView {
         }
         if tableView == super.autocompleteTableView {
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(
+                withIdentifier: "detailViewController") as? DetailMovieViewController
+            viewController?.movieData = super.searchMovieList[indexPath.row]
+            super.autocompleteTableView.isHidden = true
+            super.searchBar.text = ""
+            super.searchBar.resignFirstResponder()
+            self.navigationController?.pushViewController(viewController!, animated: true)
         }
-
     }
 }
 

@@ -12,9 +12,23 @@ import ObjectMapper
 protocol PersonRepository {
     func getPersonByMovie(movieId: Int, page: Int,
                           completion: @escaping (BaseResult<PersonListByMovieResponse>) -> Void)
+    func getPersonDetail(personId: Int, page: Int,
+                         completion: @escaping (BaseResult<Person>) -> Void)
 }
 
 class PersonRepositoryImpl: PersonRepository {
+    internal func getPersonDetail(personId: Int, page: Int, completion: @escaping (BaseResult<Person>) -> Void) {
+        let input = PersonDetailRequest(personId: personId, page: page)
+
+        api?.request(input: input) { (object: Person?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            }
+        }
+    }
+
     private var api: ApiService?
 
     required init(api: ApiService) {

@@ -23,6 +23,10 @@ class PersonCollectionViewCell: UICollectionViewCell {
             personImageView.downloadedFrom(link: url)
         }
         personNameLabel.text = person.name
-        personCharacterLabel.text = person.character
+        if let character = person.character {
+            personCharacterLabel.text = character
+        } else {
+            personCharacterLabel.text = person.personJob
+        }
     }
 }
