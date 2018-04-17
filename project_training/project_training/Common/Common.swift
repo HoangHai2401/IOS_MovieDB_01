@@ -21,6 +21,7 @@ public struct Common {
     static let appName = "MovieDB_01"
     static let defaultResult = "No result"
     static let numberCellInRow = 5
+    static let movieDatabase = "MovieDatabase"
 
     static func getGender(gender: Int) -> String {
         var genderString = ""

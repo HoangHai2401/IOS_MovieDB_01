@@ -50,6 +50,13 @@ class Movie: BaseModel {
         runTime <- map["runtime"]
     }
 
+    init(title: String, movieId: Int, posterPath: String, overview: String) {
+        self.title = title
+        self.movieId = movieId
+        self.posterPath = posterPath
+        self.overview = overview
+    }
+
     func getFullLink() -> String? {
         guard let path = posterPath else { return nil }
         return Urls.imageUrl + "\(path)"

@@ -12,8 +12,18 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
     var movieData: Movie?
     var characterList = [Person]()
     var producerList = [Person]()
+    var movieList = [Movie]()
     var heightDescription = 0
     var genresString = ""
+    private lazy var favoriteBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: "heart")?.withRenderingMode(.alwaysOriginal),
+                               style: .plain, target: self, action: #selector(favoriteButtonClicked(sender:)))
+    }()
+
+    private lazy var unFavoriteBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: "hearted")?.withRenderingMode(.alwaysOriginal),
+                               style: .plain, target: self, action: #selector(unFavoriteButtonClicked(sender:)))
+    }()
 
     let cellsPerRow = 5
     private let personRepository: PersonRepository = PersonRepositoryImpl(api: ApiService.share)
@@ -59,8 +69,31 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
             producerCollectionView.delegate = self
             producerCollectionView.dataSource = self
             producerCollectionView.register(nib, forCellWithReuseIdentifier: "PersonCollectionViewCell")
+            self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+            if HandlingMovieDatabase.checkData(movie: movie) != nil {
+                favoriteBarButton.tintColor = UIColor.white
+                favoriteBarButton.image = UIImage(named: "hearted")
+            }
             if let movieId = movie.movieId {
                 getData(movieId: movieId)
+            }
+        }
+    }
+
+    func favoriteButtonClicked(sender: AnyObject) {
+        if let movie = movieData {
+            if HandlingMovieDatabase.checkData(movie: movie) == nil {
+                if HandlingMovieDatabase.insertMovie(movie: movie) {
+                    self.navigationItem.rightBarButtonItem = self.unFavoriteBarButton
+                }
+            }
+        }
+    }
+
+    func unFavoriteButtonClicked(sender: AnyObject) {
+        if let movie = movieData {
+            if HandlingMovieDatabase.deleteMovie(movie: movie) {
+                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
             }
         }
     }

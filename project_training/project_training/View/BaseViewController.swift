@@ -14,25 +14,17 @@ class BaseViewController: UIViewController {
                                style: .plain, target: self, action: #selector(backButtonClicked(sender:)))
     }()
 
-    private lazy var favoriteBarButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "favorite")?.withRenderingMode(.alwaysOriginal),
-                               style: .plain, target: self, action: #selector(favoriteButtonClicked(sender:)))
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.backBarButton
-        self.navigationItem.rightBarButtonItem = self.favoriteBarButton
     }
 
     func backButtonClicked(sender: AnyObject) {
         if let navigationController = navigationController {
             navigationController.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
-    }
-
-    func favoriteButtonClicked(sender: AnyObject) {
     }
 }
