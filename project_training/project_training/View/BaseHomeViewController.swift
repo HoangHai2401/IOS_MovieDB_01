@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class BaseHomeViewController: UIViewController, AlertViewControllerExtension {
+class BaseHomeViewController: UIViewController, AlertViewControllerExtension, NVActivityIndicatorViewable {
     var searchList = [String]()
     var defaultPage = 1
     var searchMovieList = [Movie]()
@@ -46,6 +47,17 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension {
         self.navigationItem.rightBarButtonItem = self.searchBarButton
         navigationItem.title = Common.appName
         setSearchBar()
+    }
+
+    func showLoadingOnParent() {
+        let size = CGSize(width: 35, height: 35)
+        startAnimating(size, message: "", messageFont: nil, type: NVActivityIndicatorType(rawValue: 23)!,
+                       color: .white, padding: 0, displayTimeThreshold: 0,
+                       minimumDisplayTime: 0, backgroundColor: .clear, textColor: .white)
+    }
+
+    func hideLoading() {
+        self.stopAnimating()
     }
 
     private func setSearchBar() {

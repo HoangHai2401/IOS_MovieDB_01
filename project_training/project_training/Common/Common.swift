@@ -20,10 +20,14 @@ public struct Common {
                              (10770, "TV Movie"), (878, "Science Fiction"), (53, "Thriller"), (10752, "War"),
                              (37, "Western")]
     static let appName = "MovieDB_01"
+    static let titleMainNavigation = "Framgia Films"
     static let defaultResult = "No result"
     static let numberCellInRow = 5
+    static let cellsPerRow = 3
+    static let totalTabInSegment = 4
     static let movieDatabase = "MovieDatabase"
     static let blackColor = UIColor.hexColor(hex: "#000000", alpha: 0.7)
+    static let activityIndicatorHeight = 35
 
     static func getGender(gender: Int) -> String {
         var genderString = ""

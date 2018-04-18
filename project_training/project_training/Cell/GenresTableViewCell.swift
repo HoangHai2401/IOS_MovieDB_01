@@ -8,25 +8,39 @@
 
 import UIKit
 
+protocol GenresTableViewCellDelegate: AnyObject {
+    func moreButtonTapped(cell: GenresTableViewCell)
+}
+
 class GenresTableViewCell: UITableViewCell {
     var listMovieOfGenre = [Movie]()
-    let cellsPerRow = 3
     var defaultPage = 1
+    weak var delegate: GenresTableViewCellDelegate?
+
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var collectionViewInTable: UICollectionView!
+    @IBOutlet weak var moreMovieGenresButton: UIButton!
+
+    @IBAction func displayMoreMovieGenres(_ sender: Any) {
+        delegate?.moreButtonTapped(cell: self)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollectionViewInTable()
     }
 
-    func setContentForCell(genresId: Int) {
-        movieRepository.getMovieByGenres(genresId: genresId, page: defaultPage) { result in
+    func setContentForCell(index: Int) {
+        setElementForCell(sectionName: Common.listGenres[index].1)
+        movieRepository.getMovieByGenres(genresId: Common.listGenres[index].0, page: defaultPage) { result in
             switch result {
             case .success(let MovieListByGenresResponse):
-                self.listMovieOfGenre = (MovieListByGenresResponse?.movieList)!
+                guard let movieList = MovieListByGenresResponse?.movieList else {
+                    return
+                }
+                self.listMovieOfGenre = movieList
             case .failure(let error):
                 print((error?.errorMessage)!)
             }
@@ -41,6 +55,12 @@ class GenresTableViewCell: UITableViewCell {
         collectionViewInTable.delegate = self
         let nib = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         collectionViewInTable.register(nib, forCellWithReuseIdentifier: "MovieCollectionViewCell")
+    }
+
+    func setElementForCell(sectionName: String) {
+        moreMovieGenresButton.layer.cornerRadius = 3
+        moreMovieGenresButton.clipsToBounds = true
+        sectionLabel.text = sectionName
     }
 }
 
@@ -73,9 +93,9 @@ extension GenresTableViewCell: UICollectionViewDelegateFlowLayout {
         }
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * CGFloat(cellsPerRow - 1))
-        let width = Int((collectionView.bounds.width - totalSpace) / CGFloat(cellsPerRow))
-        let height = Int((collectionView.bounds.width*1.5) / CGFloat(cellsPerRow))
+            + (flowLayout.minimumInteritemSpacing * CGFloat(Common.cellsPerRow - 1))
+        let width = Int((collectionView.bounds.width - totalSpace) / CGFloat(Common.cellsPerRow))
+        let height = Int((collectionView.bounds.width*1.5) / CGFloat(Common.cellsPerRow))
         return CGSize(width: width, height: height)
     }
 }

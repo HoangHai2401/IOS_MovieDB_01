@@ -13,7 +13,6 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
     var movieList = [Movie]()
     var heightDescription = 0
 
-    let cellsPerRow = 5
     private let personRepository: PersonRepository = PersonRepositoryImpl(api: ApiService.share)
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
@@ -56,50 +55,57 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
         movieCollectionView.register(nib, forCellWithReuseIdentifier: "MovieCollectionViewCell")
     }
 
+    func setDataForView(personData: Person?) {
+        if let imageUrl = personData?.getFullLink() {
+            self.personImageView.downloadedFrom(link: imageUrl)
+        }
+        if let name = personData?.name {
+            self.navigationItem.title = name
+            self.personNameLabel.text = name
+        }
+        self.personImageView.contentMode = .scaleToFill
+        let description = personData?.biography  ?? Common.defaultResult
+        let descriptionBounds = TextSize.size(description,
+                                              font: UIFont.systemFont(ofSize: 13.0),
+                                              width: self.descriptionView.frame.width)
+        if descriptionBounds.height > 70 {
+            self.seeMoreButton.isHidden = false
+            self.heightDescription = Int(descriptionBounds.height)
+        } else {
+            self.seeMoreButton.isHidden = true
+            self.overviewHeightContraint.constant = descriptionBounds.height
+        }
+        self.personOverViewLabel.text = description != "" ? description : Common.defaultResult
+        if let gender = personData?.gender {
+            self.genderLabel.text = "Gender: " + Common.getGender(gender: gender)
+        }
+        let placeOfBirth = personData?.placeOfBirth ?? Common.defaultResult
+        self.personPlaceOfBirthLabel.text = "Place of birth: " + placeOfBirth
+        let homePage = personData?.homepage ?? Common.defaultResult
+        officeSiteLabel.text = "HomePage: " + homePage
+        let birthday = personData?.birthday ?? Common.defaultResult
+        self.personBirthDayLabel.text = "Birthday: " + birthday
+        if let alsoKnownAs = personData?.alsoKnownAs {
+            var alsoKnownAsString = ""
+            for item in alsoKnownAs {
+                alsoKnownAsString += item + "\n"
+            }
+            self.alsoKnownAsLabel.text = alsoKnownAsString != "" ? alsoKnownAsString : Common.defaultResult
+        }
+        self.hideLoading()
+    }
+
     func getData(personId: Int) {
+        self.showLoadingOnParent()
         personRepository.getPersonDetail(personId: personId, page: 1) { result in
             switch result {
-            case .success(let data):
-                if let personData = data {
-                    DispatchQueue.main.async {
-                        if let imageUrl = personData.getFullLink() {
-                            self.personImageView.downloadedFrom(link: imageUrl)
-                        }
-                        if let name = personData.name {
-                            self.navigationItem.title = name
-                        }
-                        self.personImageView.contentMode = .scaleToFill
-                        self.personNameLabel.text = personData.name
-                        let description = personData.biography  ?? "no info of person"
-                        let descriptionBounds = TextSize.size(description,
-                                                                  font: UIFont.systemFont(ofSize: 13.0),
-                                                                  width: self.descriptionView.frame.width)
-                        if descriptionBounds.height > 70 {
-                            self.seeMoreButton.isHidden = false
-                            self.heightDescription = Int(descriptionBounds.height)
-                        } else {
-                            self.seeMoreButton.isHidden = true
-                            self.overviewHeightContraint.constant = descriptionBounds.height
-                        }
-                        self.personOverViewLabel.text = description
-                        if let gender = personData.gender {
-                            self.genderLabel.text = "Gender: " + Common.getGender(gender: gender)
-                        }
-                        let placeOfBirth = personData.placeOfBirth ?? Common.defaultResult
-                            self.personPlaceOfBirthLabel.text = "Place of birth: " + placeOfBirth
-                        let birthday = personData.birthday ?? Common.defaultResult
-                            self.personBirthDayLabel.text = "Birthday: " + birthday
-                        if let alsoKnownAs = personData.alsoKnownAs {
-                            var alsoKnownAsString = ""
-                            for item in alsoKnownAs {
-                                alsoKnownAsString += item + "\n"
-                            }
-                            self.alsoKnownAsLabel.text = alsoKnownAsString
-                        }
-                    }
+            case .success(let personData):
+                DispatchQueue.main.async {
+                    self.setDataForView(personData: personData)
                 }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
+                self.hideLoading()
             }
             self.getMovieByPerson(personId: personId)
         }
@@ -114,9 +120,11 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
                 }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
+                self.hideLoading()
             }
             DispatchQueue.main.async {
                 self.movieCollectionView.reloadData()
+                self.hideLoading()
             }
         }
     }
@@ -125,10 +133,12 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
 extension PersonDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(
-            withIdentifier: "detailViewController") as? DetailMovieViewController
-        viewController?.movieData = self.movieList[indexPath.row]
-        self.navigationController?.pushViewController(viewController!, animated: true)
+        guard let viewController = storyBoard.instantiateViewController(
+            withIdentifier: "detailViewController") as? DetailMovieViewController else {
+                return
+        }
+        viewController.movieData = self.movieList[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -164,9 +174,9 @@ extension PersonDetailViewController: UICollectionViewDelegateFlowLayout {
         }
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * CGFloat(cellsPerRow - 1))
-        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(cellsPerRow))
-        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(cellsPerRow))
+            + (flowLayout.minimumInteritemSpacing * CGFloat(Common.numberCellInRow - 1))
+        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(Common.numberCellInRow))
+        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(Common.numberCellInRow))
         return CGSize(width: width, height: height)
     }
 }

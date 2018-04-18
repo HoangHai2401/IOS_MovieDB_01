@@ -68,6 +68,7 @@
 		29AB27112071358F0070016B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AB270F2071358F0070016B /* Main.storyboard */; };
 		29AB27132071358F0070016B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29AB27122071358F0070016B /* Assets.xcassets */; };
 		29AB27162071358F0070016B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29AB27142071358F0070016B /* LaunchScreen.storyboard */; };
+		29BBD3FE2087B2B7008ED029 /* GenresMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BBD3FD2087B2B7008ED029 /* GenresMovieViewController.swift */; };
 		D429CADBB4850902FEA6B0C9 /* Pods_project_training.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F699E515BAE562FABCA4EF44 /* Pods_project_training.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		29AB27122071358F0070016B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29AB27152071358F0070016B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29AB27172071358F0070016B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29BBD3FD2087B2B7008ED029 /* GenresMovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenresMovieViewController.swift; sourceTree = "<group>"; };
 		C34E80ED471AC4CF6C9C3A7E /* Pods-project_training.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project_training.release.xcconfig"; path = "Pods/Target Support Files/Pods-project_training/Pods-project_training.release.xcconfig"; sourceTree = "<group>"; };
 		EC608E771838D08A78DC32F4 /* Pods-project_training.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project_training.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project_training/Pods-project_training.debug.xcconfig"; sourceTree = "<group>"; };
 		F699E515BAE562FABCA4EF44 /* Pods_project_training.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_project_training.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +209,7 @@
 				29482B48207B5EF3000F5377 /* MainViewController.swift */,
 				29482B49207B5EF3000F5377 /* ViewController.swift */,
 				2945F09420803F4B00A5AA46 /* PersonDetailViewController.swift */,
+				29BBD3FD2087B2B7008ED029 /* GenresMovieViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				29482B5B207B5F09000F5377 /* BaseHomeViewControllerExtension.swift in Sources */,
 				29482B5C207B5F09000F5377 /* CustomTextField.swift in Sources */,
 				29482B4C207B5EF3000F5377 /* CustomSideViewController.swift in Sources */,
+				29BBD3FE2087B2B7008ED029 /* GenresMovieViewController.swift in Sources */,
 				29482B3B207B5EC7000F5377 /* AppDelegate.swift in Sources */,
 				2927C0522086E6F900BDB823 /* MovieTrailerResponse.swift in Sources */,
 				2944E9B9207CF84600A44715 /* PersonRepository.swift in Sources */,
