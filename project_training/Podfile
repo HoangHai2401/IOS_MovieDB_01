@@ -9,5 +9,7 @@ pod 'SwiftyJSON'
 pod 'Alamofire', '~> 4.2'
 pod 'SwiftLint'
 pod 'ObjectMapper'
+pod 'youtube-ios-player-helper'
+pod 'SDWebImage'
 
 end

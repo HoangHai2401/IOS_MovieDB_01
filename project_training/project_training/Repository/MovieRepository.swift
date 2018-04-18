@@ -24,6 +24,9 @@ protocol MovieRepository {
 
     func getMovieDetail(movieId: Int, page: Int,
                         completion: @escaping (BaseResult<Movie>) -> Void)
+
+    func getMovieTrailer(movieId: Int, page: Int,
+                         completion: @escaping (BaseResult<MovieTrailerResponse>) -> Void)
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -45,6 +48,20 @@ class MovieRepositoryImpl: MovieRepository {
             } else {
                 completion(.failure(error: nil))
             }
+        }
+    }
+
+    func getMovieTrailer(movieId: Int, page: Int,
+                         completion: @escaping (BaseResult<MovieTrailerResponse>) -> Void) {
+        let input = MovieTrailerRequest(movieId: movieId, page: page)
+
+        api?.request(input: input) { (object: MovieTrailerResponse?, error) in
+            guard let object = object else {
+                let error = error
+                completion(.failure(error: error))
+                return
+            }
+            completion(.success(object))
         }
     }
 
