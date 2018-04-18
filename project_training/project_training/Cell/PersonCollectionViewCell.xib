@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="144" height="202"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="NaG-Us-oXT">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="NaG-Us-oXT">
                         <rect key="frame" x="0.0" y="0.0" width="144" height="151.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHT-Fs-gZQ">
@@ -60,6 +60,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favorite" width="32" height="32"/>
+        <image name="frame" width="64" height="64"/>
     </resources>
 </document>

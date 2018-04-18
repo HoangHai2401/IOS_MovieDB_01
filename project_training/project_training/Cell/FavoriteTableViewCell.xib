@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="FavoriteTableViewCell" customModule="project_training" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="488" height="148"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="488" height="147"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5yy-hF-QFl">
+                        <rect key="frame" x="3" y="3" width="122" height="141.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzK-F5-ULm">
+                        <rect key="frame" x="130" y="3" width="353" height="35.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXx-gN-sUL">
+                        <rect key="frame" x="130" y="38.5" width="353" height="106"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="5yy-hF-QFl" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:4" id="6mo-QG-gcv"/>
+                    <constraint firstItem="HzK-F5-ULm" firstAttribute="leading" secondItem="5yy-hF-QFl" secondAttribute="trailing" constant="5" id="HVm-LZ-aTm"/>
+                    <constraint firstItem="JXx-gN-sUL" firstAttribute="leading" secondItem="5yy-hF-QFl" secondAttribute="trailing" constant="5" id="LEe-eH-iX3"/>
+                    <constraint firstAttribute="trailing" secondItem="JXx-gN-sUL" secondAttribute="trailing" constant="5" id="McH-FX-YU1"/>
+                    <constraint firstAttribute="bottom" secondItem="5yy-hF-QFl" secondAttribute="bottom" constant="3" id="N7m-vE-RW4"/>
+                    <constraint firstAttribute="trailing" secondItem="HzK-F5-ULm" secondAttribute="trailing" constant="5" id="NzB-fg-KoH"/>
+                    <constraint firstItem="JXx-gN-sUL" firstAttribute="height" secondItem="5yy-hF-QFl" secondAttribute="height" multiplier="3:4" id="Szo-TL-YHb"/>
+                    <constraint firstItem="5yy-hF-QFl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="URf-kz-BCV"/>
+                    <constraint firstItem="JXx-gN-sUL" firstAttribute="top" secondItem="HzK-F5-ULm" secondAttribute="bottom" id="hJe-eM-ocd"/>
+                    <constraint firstItem="HzK-F5-ULm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="rDf-bm-7Q8"/>
+                    <constraint firstItem="HzK-F5-ULm" firstAttribute="height" secondItem="5yy-hF-QFl" secondAttribute="height" multiplier="1:4" id="u8y-mg-v2F"/>
+                    <constraint firstItem="5yy-hF-QFl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="yoQ-Mx-iWn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="movieDescriptionLabel" destination="JXx-gN-sUL" id="yPh-4z-jyU"/>
+                <outlet property="movieImageView" destination="5yy-hF-QFl" id="K4Q-vH-jY1"/>
+                <outlet property="movieNameLabel" destination="HzK-F5-ULm" id="nlB-h9-9jf"/>
+            </connections>
+            <point key="canvasLocation" x="117" y="152"/>
+        </tableViewCell>
+    </objects>
+</document>
