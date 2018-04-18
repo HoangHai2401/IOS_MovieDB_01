@@ -86,10 +86,10 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension {
 
     private func setSearchResultTableView() {
         let LocationX = 5
-        let LocationY = navigationController?.navigationBar.frame.height
+        let LocationY = 64
         let width = Int(view.frame.width * 4 / 5)
         let height = Int(view.frame.height * 2 / 5)
-        autocompleteTableView.frame = CGRect(x: LocationX, y: Int(LocationY!), width: width, height: height)
+        autocompleteTableView.frame = CGRect(x: LocationX, y: LocationY, width: width, height: height)
         autocompleteTableView.isHidden = true
         autocompleteTableView.isScrollEnabled = true
         view.addSubview(autocompleteTableView)

@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
 
-class DetailMovieViewController: BaseViewController, AlertViewControllerExtension {
+class DetailMovieViewController: BaseViewController, AlertViewControllerExtension, YTPlayerViewDelegate {
     var movieData: Movie?
     var characterList = [Person]()
     var producerList = [Person]()
     var movieList = [Movie]()
+    var trailerList = [Trailer]()
     var heightDescription = 0
     var genresString = ""
     private lazy var favoriteBarButton: UIBarButtonItem = {
@@ -29,7 +31,7 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
     private let personRepository: PersonRepository = PersonRepositoryImpl(api: ApiService.share)
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
-    @IBOutlet weak var movieBackgroundImageView: UIImageView!
+    @IBOutlet  weak var movieBackgroundImageView: UIImageView!
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieUserScoreLabel: UILabel!
@@ -42,9 +44,8 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var originalLanguageLabel: UILabel!
     @IBOutlet weak var genresLabel: UILabel!
-
-    @IBAction func trailerButtonAction(_ sender: Any) {
-    }
+    @IBOutlet weak var playViewYoutube: YTPlayerView!
+    @IBOutlet weak var timeLabel: UILabel!
 
     @IBAction func seeMoreButtonAction(_ sender: Any) {
         overviewHeightContraint.constant = CGFloat(heightDescription)
@@ -61,39 +62,50 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
     }
 
     func setView() {
-        if let movie = movieData {
-            actorCollectionView.delegate = self
-            actorCollectionView.dataSource = self
-            let nib = UINib(nibName: "PersonCollectionViewCell", bundle: nil)
-            actorCollectionView.register(nib, forCellWithReuseIdentifier: "PersonCollectionViewCell")
-            producerCollectionView.delegate = self
-            producerCollectionView.dataSource = self
-            producerCollectionView.register(nib, forCellWithReuseIdentifier: "PersonCollectionViewCell")
-            self.navigationItem.rightBarButtonItem = self.favoriteBarButton
-            if HandlingMovieDatabase.checkData(movie: movie) != nil {
-                favoriteBarButton.tintColor = UIColor.white
-                favoriteBarButton.image = UIImage(named: "hearted")
-            }
-            if let movieId = movie.movieId {
-                getData(movieId: movieId)
-            }
+        guard let movie = movieData, let movieId = movie.movieId else {
+            return
+        }
+        setCollectionView()
+        setNavigation(movie: movie)
+        getData(movieId: movieId)
+    }
+
+    func setCollectionView() {
+        let nib = UINib(nibName: "PersonCollectionViewCell", bundle: nil)
+        actorCollectionView.delegate = self
+        actorCollectionView.dataSource = self
+        actorCollectionView.register(nib, forCellWithReuseIdentifier: "PersonCollectionViewCell")
+        producerCollectionView.delegate = self
+        producerCollectionView.dataSource = self
+        producerCollectionView.register(nib, forCellWithReuseIdentifier: "PersonCollectionViewCell")
+    }
+
+    func setNavigation(movie: Movie) {
+        self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+        if HandlingMovieDatabase.checkData(movie: movie) != nil {
+            favoriteBarButton.tintColor = UIColor.white
+            self.navigationItem.rightBarButtonItem = self.unFavoriteBarButton
         }
     }
 
     func favoriteButtonClicked(sender: AnyObject) {
-        if let movie = movieData {
-            if HandlingMovieDatabase.checkData(movie: movie) == nil {
-                if HandlingMovieDatabase.insertMovie(movie: movie) {
-                    self.navigationItem.rightBarButtonItem = self.unFavoriteBarButton
-                }
+        guard let movie = movieData else {
+            return
+        }
+        if HandlingMovieDatabase.checkData(movie: movie) == nil {
+            if HandlingMovieDatabase.insertMovie(movie: movie) {
+                self.navigationItem.rightBarButtonItem = self.unFavoriteBarButton
             }
         }
     }
 
     func unFavoriteButtonClicked(sender: AnyObject) {
-        if let movie = movieData {
+        guard let movie = movieData else {
+            return
+        }
+        if HandlingMovieDatabase.checkData(movie: movie) != nil {
             if HandlingMovieDatabase.deleteMovie(movie: movie) {
-                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+                self.navigationItem.rightBarButtonItem = self.favoriteBarButton
             }
         }
     }
@@ -118,53 +130,83 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
         }
     }
 
-    func getData(movieId: Int) {
-        getPersonByMovie(movieId: movieId)
-        movieRepository.getMovieDetail(movieId: movieId, page: 1) { result in
+    func getMovieTrailer(movieId: Int) {
+        movieRepository.getMovieTrailer(movieId: movieId, page: 1) { result in
             switch result {
-            case .success(let movie):
+            case .success(let dataList):
+                if let trailerList = dataList?.trailerList {
                     DispatchQueue.main.async {
-                        if let imageUrl = movie?.getFullLink(),
-                            let imageBackDropUrl = movie?.getFullLinkBackDropPath() {
-                            self.movieImageView.downloadedFrom(link: imageUrl)
-                            self.movieBackgroundImageView.downloadedFrom(link: imageBackDropUrl)
+                        self.playViewYoutube.delegate = self
+                        let playerVars = ["playsinline": 1]
+                        if !trailerList.isEmpty, let movieKey = trailerList[0].trailerKey {
+                            self.playViewYoutube.load(withVideoId: movieKey, playerVars: playerVars)
                         }
-                        self.movieImageView.contentMode = .scaleToFill
-                        self.movieBackgroundImageView.contentMode = .scaleAspectFill
-                        self.movieBackgroundImageView.tintColor = UIColor.gray
-                        self.movieNameLabel.text = movie?.originalTitle
-                        if let voteAverage = movie?.voteAverage {
-                            self.movieUserScoreLabel.text = String(format: "%.1f", voteAverage)
-                        }
-                        if let description = movie?.overview {
-                            let descriptionBounds = TextSize.size(description,
-                                                                  font: UIFont.systemFont(ofSize: 13.0),
-                                                                  width: self.descriptionView.frame.width)
-                            if descriptionBounds.height > 70 {
-                                self.seeMoreButton.isHidden = false
-                                self.heightDescription = Int(descriptionBounds.height)
-                            } else {
-                                self.seeMoreButton.isHidden = true
-                                self.overviewHeightContraint.constant = descriptionBounds.height
-                            }
-                        }
-                        self.movieOverViewLabel.text = movie?.overview
-                        if let originalLanguage = movie?.originalLanguage, let releaseDate = movie?.releaseDate {
-                            self.originalLanguageLabel.text = "Original Language: " + originalLanguage
-                            self.releaseDateLabel.text = "Release Date: " + releaseDate
-                        }
-                        if let genresList = movie?.genres {
-                            for item in genresList {
-                                self.genresString += item.name! + "     "
-                            }
-                        }
-                        self.genresLabel.text = self.genresString
-                        self.navigationItem.title = movie?.title
                     }
+                }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
             }
         }
+    }
+
+    func getMovieDetail(movieId: Int) {
+        movieRepository.getMovieDetail(movieId: movieId, page: 1) { result in
+            switch result {
+            case .success(let movie):
+                DispatchQueue.main.async {
+                    self.setDataForView(movie: movie)
+                }
+            case .failure(let error):
+                self.showErrorAlert(message: error?.errorMessage)
+            }
+        }
+    }
+
+    func setDataForView(movie: Movie?) {
+        if let imageUrl = movie?.getFullLink(),
+            let imageBackDropUrl = movie?.getFullLinkBackDropPath() {
+            self.movieImageView.downloadedFrom(link: imageUrl)
+            self.movieBackgroundImageView.downloadedFrom(link: imageBackDropUrl)
+        }
+        self.movieImageView.contentMode = .scaleToFill
+        self.movieBackgroundImageView.contentMode = .scaleAspectFill
+        self.movieBackgroundImageView.tintColor = UIColor.gray
+        self.movieNameLabel.text = movie?.originalTitle
+        if let voteAverage = movie?.voteAverage {
+            self.movieUserScoreLabel.text = String(format: "%.1f", voteAverage) + "/10"
+        }
+        if let description = movie?.overview {
+            let descriptionBounds = TextSize.size(description,
+                                                  font: UIFont.systemFont(ofSize: 14.0),
+                                                  width: self.descriptionView.frame.width)
+            if descriptionBounds.height > 70 {
+                self.seeMoreButton.isHidden = false
+                self.heightDescription = Int(descriptionBounds.height)
+            } else {
+                self.seeMoreButton.isHidden = true
+                self.overviewHeightContraint.constant = descriptionBounds.height
+            }
+        }
+        self.movieOverViewLabel.text = movie?.overview
+        if let originalLanguage = movie?.originalLanguage,
+            let releaseDate = movie?.releaseDate, let time = movie?.runTime {
+            self.originalLanguageLabel.text = "Language: " + originalLanguage
+            self.releaseDateLabel.text = releaseDate
+            self.timeLabel.text = "\(time) min"
+        }
+        if let genresList = movie?.genres {
+            for item in genresList {
+                self.genresString += item.name! + "     "
+            }
+        }
+        self.genresLabel.text = self.genresString
+        self.navigationItem.title = movie?.title
+    }
+
+    func getData(movieId: Int) {
+        getPersonByMovie(movieId: movieId)
+        getMovieTrailer(movieId: movieId)
+        getMovieDetail(movieId: movieId)
     }
 }
 

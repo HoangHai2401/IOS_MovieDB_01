@@ -65,21 +65,23 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
                         if let imageUrl = personData.getFullLink() {
                             self.personImageView.downloadedFrom(link: imageUrl)
                         }
+                        if let name = personData.name {
+                            self.navigationItem.title = name
+                        }
                         self.personImageView.contentMode = .scaleToFill
                         self.personNameLabel.text = personData.name
-                        if let description = personData.biography {
-                            let descriptionBounds = TextSize.size(description,
+                        let description = personData.biography  ?? "no info of person"
+                        let descriptionBounds = TextSize.size(description,
                                                                   font: UIFont.systemFont(ofSize: 13.0),
                                                                   width: self.descriptionView.frame.width)
-                            if descriptionBounds.height > 70 {
-                                self.seeMoreButton.isHidden = false
-                                self.heightDescription = Int(descriptionBounds.height)
-                            } else {
-                                self.seeMoreButton.isHidden = true
-                                self.overviewHeightContraint.constant = descriptionBounds.height
-                            }
-                            self.personOverViewLabel.text = description
+                        if descriptionBounds.height > 70 {
+                            self.seeMoreButton.isHidden = false
+                            self.heightDescription = Int(descriptionBounds.height)
+                        } else {
+                            self.seeMoreButton.isHidden = true
+                            self.overviewHeightContraint.constant = descriptionBounds.height
                         }
+                        self.personOverViewLabel.text = description
                         if let gender = personData.gender {
                             self.genderLabel.text = "Gender: " + Common.getGender(gender: gender)
                         }
@@ -93,8 +95,6 @@ class PersonDetailViewController: BaseViewController, AlertViewControllerExtensi
                                 alsoKnownAsString += item + "\n"
                             }
                             self.alsoKnownAsLabel.text = alsoKnownAsString
-                        } else {
-                            self.alsoKnownAsLabel.text = "no info"
                         }
                     }
                 }

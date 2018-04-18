@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Common {
     static let listCategory = [("Popular", Urls.popularUrl ),
@@ -22,6 +23,7 @@ public struct Common {
     static let defaultResult = "No result"
     static let numberCellInRow = 5
     static let movieDatabase = "MovieDatabase"
+    static let blackColor = UIColor.hexColor(hex: "#000000", alpha: 0.7)
 
     static func getGender(gender: Int) -> String {
         var genderString = ""
