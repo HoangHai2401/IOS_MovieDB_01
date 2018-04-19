@@ -18,6 +18,7 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension, NV
     let nameNavigationLabel = UILabel()
     let searchBar = CustomTextField()
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
+    var touchOutsite: UITapGestureRecognizer?
 
     lazy var sideBarButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: "btn_left")?.withRenderingMode(.alwaysOriginal),
@@ -46,11 +47,17 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension, NV
         self.navigationItem.leftBarButtonItem = self.sideBarButton
         self.navigationItem.rightBarButtonItem = self.searchBarButton
         navigationItem.title = Common.appName
+        touchOutsite  = UITapGestureRecognizer(target: self,
+                                               action: #selector(hideAutocompleteTableView))
+        guard let touch = self.touchOutsite else {
+            return
+        }
+        view.addGestureRecognizer(touch)
         setSearchBar()
     }
 
     func showLoadingOnParent() {
-        let size = CGSize(width: 35, height: 35)
+        let size = CGSize(width: Common.activityIndicatorHeight, height: Common.activityIndicatorHeight)
         startAnimating(size, message: "", messageFont: nil, type: NVActivityIndicatorType(rawValue: 23)!,
                        color: .white, padding: 0, displayTimeThreshold: 0,
                        minimumDisplayTime: 0, backgroundColor: .clear, textColor: .white)
@@ -62,7 +69,7 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension, NV
 
     private func setSearchBar() {
         searchBar.backgroundColor = .white
-        let heightSearchBar = 35
+        let heightSearchBar = Common.activityIndicatorHeight
         let widthSearchBar = view.frame.width
         searchBar.frame = CGRect(x: 0, y: 0, width: Int(widthSearchBar), height: heightSearchBar)
         searchBar.attributedPlaceholder = NSAttributedString(
@@ -77,34 +84,51 @@ class BaseHomeViewController: UIViewController, AlertViewControllerExtension, NV
         movieRepository.searchMovieByQuery(query: query, page: defaultPage) { result in
             switch result {
             case .success(let MovieListByQueryResponse):
-                self.searchMovieList = (MovieListByQueryResponse?.movieList)!
-                for item in (MovieListByQueryResponse?.movieList)! {
-                    self.searchList.append(item.title!)
-                }
-                let height = self.autocompleteTableView.contentSize.height > self.view.frame.height ?
-                    self.view.frame.height / 3 : self.autocompleteTableView.contentSize.height
-                self.autocompleteTableView.frame = CGRect(x: self.autocompleteTableView.frame.origin.x,
-                                                          y: self.autocompleteTableView.frame.origin.y + 5,
-                                                          width: self.autocompleteTableView.frame.size.width,
-                                                          height: height)
-                DispatchQueue.main.async {
-                    self.autocompleteTableView.reloadData()
-                }
+                self.setDataAutoCompleteTableView(movieListByQueryResponse: MovieListByQueryResponse)
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
             }
         }
     }
 
+    func setDataAutoCompleteTableView(movieListByQueryResponse: MovieListByQueryResponse?) {
+        guard let searchMovieListData = movieListByQueryResponse?.movieList else {
+            return
+        }
+        self.searchMovieList = searchMovieListData
+        for item in searchMovieListData {
+            self.searchList.append(item.title ?? "")
+        }
+        DispatchQueue.main.async {
+            var frameTable = self.autocompleteTableView.frame
+            if (CGFloat(self.searchList.count) * CGFloat(Common.rowHeightDefault)) > self.view.frame.height {
+                frameTable.size.height = self.view.frame.height / 3
+            } else {
+                frameTable.size.height = CGFloat(self.searchList.count) * CGFloat(Common.rowHeightDefault)
+            }
+            self.autocompleteTableView.frame = frameTable
+            self.autocompleteTableView.reloadData()
+        }
+    }
+
     private func setSearchResultTableView() {
         let LocationX = 5
-        let LocationY = 64
+        let LocationY = Common.navigationDefaultHeight
         let width = Int(view.frame.width * 4 / 5)
         let height = Int(view.frame.height * 2 / 5)
         autocompleteTableView.frame = CGRect(x: LocationX, y: LocationY, width: width, height: height)
+        autocompleteTableView.rowHeight = CGFloat(Common.rowHeightDefault)
         autocompleteTableView.isHidden = true
         autocompleteTableView.isScrollEnabled = true
         view.addSubview(autocompleteTableView)
+    }
+
+    @objc private func hideAutocompleteTableView() {
+        guard let touch = self.touchOutsite else {
+            return
+        }
+        self.autocompleteTableView.isHidden = true
+        self.view.removeGestureRecognizer(touch)
     }
 }
 

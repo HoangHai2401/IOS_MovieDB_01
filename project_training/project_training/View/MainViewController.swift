@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class MainViewController: BaseHomeViewController {
     let heightForLabelCell = 50

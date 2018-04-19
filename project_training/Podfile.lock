@@ -7,7 +7,6 @@ PODS:
   - SDWebImage/Core (4.0.0)
   - SidebarOverlay (3.1.0)
   - SwiftLint (0.17.0)
-  - SwiftyJSON (3.1.4)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
@@ -17,7 +16,6 @@ DEPENDENCIES:
   - SDWebImage
   - SidebarOverlay (~> 3.1)
   - SwiftLint
-  - SwiftyJSON
   - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
@@ -27,9 +25,8 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SidebarOverlay: 04eee5de00d4c71a4381f937d9bdf7b3c9d7d1e7
   SwiftLint: 9fb1dd71d5952d130f8c2fb60ae2e1475cf5d575
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 8eff36478172e02ce254c07174947ac6998dc9e9
+PODFILE CHECKSUM: 912273e041777a445becd7a3ac00deacf91bda47
 
 COCOAPODS: 1.1.1
