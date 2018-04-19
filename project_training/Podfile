@@ -11,5 +11,6 @@ pod 'SwiftLint'
 pod 'ObjectMapper'
 pod 'youtube-ios-player-helper'
 pod 'SDWebImage'
+pod 'NVActivityIndicatorView'
 
 end

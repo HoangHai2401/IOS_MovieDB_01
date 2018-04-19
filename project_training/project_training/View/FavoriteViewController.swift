@@ -10,7 +10,6 @@ import UIKit
 
 class FavoriteViewController: BaseViewController {
     var favoriteList = [Movie]()
-    let cellsPerRow = 3
 
     @IBOutlet weak var favoriteTableView: UITableView!
 
@@ -32,7 +31,7 @@ class FavoriteViewController: BaseViewController {
     func setView() {
         let nib = UINib(nibName: "FavoriteTableViewCell", bundle: nil)
         favoriteTableView.register(nib, forCellReuseIdentifier: "FavoriteTableViewCell")
-        self.navigationController?.navigationItem.title = "Favorite Movies"
+        navigationItem.title = "Favorite Movies"
         if favoriteList.isEmpty {
             favoriteTableView.isHidden = true
         } else {
@@ -44,7 +43,7 @@ class FavoriteViewController: BaseViewController {
 // MARK: extension UITableViewDelegate for genresTableview and autocompleteTableView in MainViewController
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = CGFloat(tableView.bounds.width * 1.2) / CGFloat(cellsPerRow)
+        let height = CGFloat(tableView.bounds.width * 1.2) / CGFloat(Common.cellsPerRow)
         return height
     }
 
@@ -64,11 +63,13 @@ extension FavoriteViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(
-            withIdentifier: "detailViewController") as? DetailMovieViewController
-        viewController?.movieData = self.favoriteList[indexPath.row]
+        guard let viewController = storyBoard.instantiateViewController(
+            withIdentifier: "detailViewController") as? DetailMovieViewController else {
+                return
+        }
+        viewController.movieData = self.favoriteList[indexPath.row]
         print(favoriteList[indexPath.row].movieId ?? 0)
-        self.navigationController?.pushViewController(viewController!, animated: true)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

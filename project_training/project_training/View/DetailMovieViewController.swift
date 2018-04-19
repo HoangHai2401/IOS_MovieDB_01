@@ -27,7 +27,6 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
                                style: .plain, target: self, action: #selector(unFavoriteButtonClicked(sender:)))
     }()
 
-    let cellsPerRow = 5
     private let personRepository: PersonRepository = PersonRepositoryImpl(api: ApiService.share)
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
@@ -122,10 +121,12 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
                 }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
+                self.hideLoading()
             }
             DispatchQueue.main.async {
                 self.actorCollectionView.reloadData()
                 self.producerCollectionView.reloadData()
+                self.hideLoading()
             }
         }
     }
@@ -141,10 +142,12 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
                         if !trailerList.isEmpty, let movieKey = trailerList[0].trailerKey {
                             self.playViewYoutube.load(withVideoId: movieKey, playerVars: playerVars)
                         }
+                        self.hideLoading()
                     }
                 }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
+                self.hideLoading()
             }
         }
     }
@@ -155,9 +158,11 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
             case .success(let movie):
                 DispatchQueue.main.async {
                     self.setDataForView(movie: movie)
+                    self.hideLoading()
                 }
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
+                self.hideLoading()
             }
         }
     }
@@ -175,18 +180,18 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
         if let voteAverage = movie?.voteAverage {
             self.movieUserScoreLabel.text = String(format: "%.1f", voteAverage) + "/10"
         }
-        if let description = movie?.overview {
-            let descriptionBounds = TextSize.size(description,
-                                                  font: UIFont.systemFont(ofSize: 14.0),
-                                                  width: self.descriptionView.frame.width)
-            if descriptionBounds.height > 70 {
-                self.seeMoreButton.isHidden = false
-                self.heightDescription = Int(descriptionBounds.height)
-            } else {
-                self.seeMoreButton.isHidden = true
-                self.overviewHeightContraint.constant = descriptionBounds.height
-            }
+        let description = movie?.overview  ?? Common.defaultResult
+        let descriptionBounds = TextSize.size(description,
+                                              font: UIFont.systemFont(ofSize: 13.0),
+                                              width: self.descriptionView.frame.width)
+        if descriptionBounds.height > 70 {
+            self.seeMoreButton.isHidden = false
+            self.heightDescription = Int(descriptionBounds.height)
+        } else {
+            self.seeMoreButton.isHidden = true
+            self.overviewHeightContraint.constant = descriptionBounds.height
         }
+        self.movieOverViewLabel.text = description != "" ? description : Common.defaultResult
         self.movieOverViewLabel.text = movie?.overview
         if let originalLanguage = movie?.originalLanguage,
             let releaseDate = movie?.releaseDate, let time = movie?.runTime {
@@ -204,6 +209,7 @@ class DetailMovieViewController: BaseViewController, AlertViewControllerExtensio
     }
 
     func getData(movieId: Int) {
+        self.showLoadingOnParent()
         getPersonByMovie(movieId: movieId)
         getMovieTrailer(movieId: movieId)
         getMovieDetail(movieId: movieId)
@@ -283,9 +289,9 @@ extension DetailMovieViewController: UICollectionViewDelegateFlowLayout {
         }
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * CGFloat(cellsPerRow - 1))
-        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(cellsPerRow))
-        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(cellsPerRow))
+            + (flowLayout.minimumInteritemSpacing * CGFloat(Common.numberCellInRow - 1))
+        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(Common.numberCellInRow))
+        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(Common.numberCellInRow))
         return CGSize(width: width, height: height)
     }
 }

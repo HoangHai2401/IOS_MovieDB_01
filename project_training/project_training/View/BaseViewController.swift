@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, NVActivityIndicatorViewable {
     private lazy var backBarButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: "back_toolbar")?.withRenderingMode(.alwaysOriginal),
                                style: .plain, target: self, action: #selector(backButtonClicked(sender:)))
@@ -19,6 +20,17 @@ class BaseViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.backBarButton
+    }
+
+    func hideLoading() {
+        self.stopAnimating()
+    }
+
+    func showLoadingOnParent() {
+        let size = CGSize(width: Common.activityIndicatorHeight, height: Common.activityIndicatorHeight)
+        startAnimating(size, message: "", messageFont: nil, type: NVActivityIndicatorType(rawValue: 23)!,
+                       color: .white, padding: 0, displayTimeThreshold: 0,
+                       minimumDisplayTime: 0, backgroundColor: .clear, textColor: .white)
     }
 
     func backButtonClicked(sender: AnyObject) {

@@ -11,7 +11,6 @@ import SwiftyJSON
 
 class MainViewController: BaseHomeViewController {
     let heightForLabelCell = 50
-    let cellsPerRow = 3
     private let movieRepository: MovieRepository = MovieRepositoryImpl(api: ApiService.share)
 
     var movieList = [Movie]()
@@ -46,41 +45,67 @@ class MainViewController: BaseHomeViewController {
     }
 
     func getdata(url: String) {
+        self.showLoadingOnParent()
         movieRepository.getMovieByCategory(categoryUrl: url, page: defaultPage) { result in
             switch result {
-            case .success(let MovieListByCategoryResponse):
-                self.movieList += (MovieListByCategoryResponse?.movieList)!
+            case .success(let movieListByCategoryResponse):
+                self.handleSuccessGetMovieByCategory(movieListByCategoryResponse: movieListByCategoryResponse)
             case .failure(let error):
                 self.showErrorAlert(message: error?.errorMessage)
-            }
-            DispatchQueue.main.async {
-                self.movieCollectionView.reloadData()
+                self.hideLoading()
             }
         }
     }
 
+    func handleSuccessGetMovieByCategory(movieListByCategoryResponse: MovieListByCategoryResponse?) {
+        guard let movieListByCategory = movieListByCategoryResponse?.movieList else {
+            return
+        }
+        self.movieList += movieListByCategory
+        DispatchQueue.main.async {
+            self.movieCollectionView.reloadData()
+            self.hideLoading()
+        }
+    }
+
     func prepareView() {
+        setSegment()
+        setTableView()
+        setNavigation()
+        setCollectionView()
+        getdata(url: Urls.popularUrl)
+        activityIndicator = LoadMoreActivityIndicator(collectionView: movieCollectionView,
+                                                      spacingFromLastCell: 10,
+                                                      spacingFromCellwhenLoadMore: 60)
+    }
+
+    func setCollectionView() {
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
+        let nib = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
+        movieCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
+        movieCollectionView.isHidden = false
+    }
+
+    func setSegment() {
+        categorySegment.apportionsSegmentWidthsByContent = true
+        categorySegment.addUnderlineForSelectedSegment()
+        for item in 0...Common.totalTabInSegment {
+            categorySegment.setTitle(Common.listCategory[item].0, forSegmentAt: item)
+        }
+    }
+
+    func setNavigation() {
+        navigationItem.title = Common.titleMainNavigation
+    }
+
+    func setTableView() {
         genresTableView.delegate = self
         genresTableView.dataSource = self
         super.autocompleteTableView.delegate = self
         super.autocompleteTableView.dataSource = self
         super.autocompleteTableView.register(UITableViewCell.self, forCellReuseIdentifier: "searchcell")
-        categorySegment.apportionsSegmentWidthsByContent = true
-        categorySegment.addUnderlineForSelectedSegment()
-        for item in 0...4 {
-            categorySegment.setTitle(Common.listCategory[item].0, forSegmentAt: item)
-        }
-        self.navigationController?.navigationItem.title = "IOS_DB01"
-        let nib = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
-        movieCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
-        getdata(url: Urls.popularUrl)
         genresTableView.isHidden = true
-        movieCollectionView.isHidden = false
-        activityIndicator = LoadMoreActivityIndicator(collectionView: movieCollectionView,
-                                                      spacingFromLastCell: 10,
-                                                      spacingFromCellwhenLoadMore: 60)
     }
 
     func displayPopularMovies() {
@@ -186,9 +211,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         }
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * CGFloat(cellsPerRow - 1))
-        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(cellsPerRow))
-        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(cellsPerRow))
+            + (flowLayout.minimumInteritemSpacing * CGFloat(Common.cellsPerRow - 1))
+        let width = Int(CGFloat(collectionView.bounds.width - totalSpace) / CGFloat(Common.cellsPerRow))
+        let height = Int(CGFloat(collectionView.bounds.width * 1.5) / CGFloat(Common.cellsPerRow))
         return CGSize(width: width, height: height)
     }
 }
@@ -198,7 +223,8 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightCell: CGFloat?
         if tableView == self.genresTableView {
-            let height = CGFloat(tableView.bounds.width * 1.5) / CGFloat(cellsPerRow) + CGFloat(heightForLabelCell)
+            let height = CGFloat(tableView.bounds.width * 1.5) /
+                CGFloat(Common.cellsPerRow) + CGFloat(heightForLabelCell)
             heightCell = height
         }
         if tableView == super.autocompleteTableView {
@@ -209,17 +235,17 @@ extension MainViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == self.genresTableView {
-        }
         if tableView == super.autocompleteTableView {
             let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-            let viewController = storyBoard.instantiateViewController(
-                withIdentifier: "detailViewController") as? DetailMovieViewController
-            viewController?.movieData = super.searchMovieList[indexPath.row]
+            guard let viewController = storyBoard.instantiateViewController(
+                withIdentifier: "detailViewController") as? DetailMovieViewController else {
+                    return
+            }
+            viewController.movieData = super.searchMovieList[indexPath.row]
             super.autocompleteTableView.isHidden = true
             super.searchBar.text = ""
             super.searchBar.resignFirstResponder()
-            self.navigationController?.pushViewController(viewController!, animated: true)
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }
@@ -246,8 +272,8 @@ extension MainViewController: UITableViewDataSource {
                 cellToReturn = cell
                 return cell
             }
-            cell.setContentForCell(genresId: Common.listGenres[indexPath.row].0)
-            cell.sectionLabel.text = Common.listGenres[indexPath.row].1
+            cell.delegate = self
+            cell.setContentForCell(index: indexPath.row)
             return cell
         }
         if tableView == super.autocompleteTableView {
@@ -261,5 +287,21 @@ extension MainViewController: UITableViewDataSource {
             return cell
         }
         return cellToReturn
+    }
+}
+
+// MARK: extension GenresTableViewCellDelegate for genresTableview and autocompleteTableView in MainViewController
+extension MainViewController: GenresTableViewCellDelegate {
+    func moreButtonTapped(cell: GenresTableViewCell) {
+        guard let indexPath = self.genresTableView.indexPath(for: cell) else {
+            return
+        }
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        guard let viewController = storyBoard.instantiateViewController(
+            withIdentifier: "genresMovieViewController") as? GenresMovieViewController else {
+                return
+        }
+        viewController.genres = Common.listGenres[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
